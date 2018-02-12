@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Form demonstration - Chapter 4{% endblock %}
+
+{% block page_content %}
+
+    {% import 'bootstrap/wtf.html' as wtf %}
+
+    {{ wtf.quick_form(form) }} <!-- easy way to generate form, but cannot have horizontal radio buttons -->
+
+    <!-- do your own form if you want horizontal radio buttons -->
+
+    <form action="/" method="post" class="form" role="form">
+
+        {{ form.hidden_tag() }}
+
+    <div class="form-group required">
+        <label class="control-label">{{ form.name.label }}</label>
+        {{ form.name(class='form-control') }}
+    </div>
+    <label for="rating">
+        {{ form.rating.label }}
+    </label>
+    <br>
+
+    <div class="form-check form-check-inline">
+    {% for r in form.rating %}
+
+        <label class=".radio-inline" style="margin-right: 20px;">
+
+        {{ r(style='margin-right:5px;') }}{{ r.label }}
+
+        </label>
+
+
+    {% endfor %}
+    </div>
+
+    </form>
+
+{% endblock %}
